@@ -1,6 +1,6 @@
 # Async Worker
 
-```
+```sh
 npm i @danieldiekmeier/async-worker
 ```
 
@@ -15,7 +15,7 @@ Put your worker logic somewhere in your application logic, reuse all your stuff,
 
 Here is a code example:
 
-```
+```js
 import Worker from '@danieldiekmeier/async-worker'
 
 new Worker({

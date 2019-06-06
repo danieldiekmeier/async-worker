@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/danieldiekmeier/async-worker#readme",
   "dependencies": {
-    "esm": "^3.2.5"
+    "esm": "^3.2.25"
   },
   "ava": {
     "files": [
@@ -36,6 +36,6 @@
     ]
   },
   "devDependencies": {
-    "ava": "^1.2.1"
+    "ava": "^2.0.0"
   }
 }

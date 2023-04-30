@@ -1,74 +1,77 @@
-import test from 'ava'
-import Worker from '../index.js'
+import { test } from 'node:test'
+import { strict as assert } from 'node:assert'
+import Worker from '../worker.js'
 
-async function wait (duration) {
-  return new Promise(resolve => {
+async function wait(duration) {
+  return new Promise((resolve) => {
     setTimeout(resolve, duration)
   })
 }
 
-test('Worker works', async t => {
+test('Worker works', async () => {
   let a = 0
 
   const worker = new Worker({
-    async task () { a += 1 },
-    interval: 10
+    async task() {
+      a += 1
+    },
+    interval: 10,
   })
 
   await wait(20)
 
   // make sure it ran at least twice.
-  t.true(a >= 2)
+  assert(a >= 2)
 
   worker.stop()
 })
 
-test('Worker doesnt start another round if previous round is unfinished', async t => {
+test('Worker doesnt start another round if previous round is unfinished', async () => {
   let a = 0
 
   const worker = new Worker({
-    async task () {
+    async task() {
       a += 1
-      await wait(1000)
+      await wait(500)
     },
-    interval: 10
+    interval: 10,
   })
 
   await wait(100)
 
   // ensure that task ran exactly once
-  t.is(a, 1)
+  assert(a === 1)
 
   worker.stop()
 })
 
-test('Worker doesnt crash if task errors', async t => {
+test('Worker doesnt crash if task errors', async () => {
   let a = 0
   let errorCount = 0
   let lastError
 
   const worker = new Worker({
-    async task () {
+    async task() {
       a += 1
 
       if (a === 1) {
         throw new Error('Error the first time!')
       }
     },
-    onError (err) {
+    onError(err) {
       errorCount += 1
       lastError = err
     },
-    interval: 10
+    interval: 10,
   })
 
   await wait(100)
 
   // make sure it ran at least twice
-  t.true(a >= 2)
-  t.is(errorCount, 1)
-  t.true(lastError instanceof Error)
-  t.is(lastError.message, 'Error the first time!')
+  assert(a >= 2)
+  assert(errorCount === 1)
+  assert(lastError instanceof Error)
+  assert(lastError.message === 'Error the first time!')
 
   worker.stop()
 })

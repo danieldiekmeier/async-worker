@@ -1,12 +1,12 @@
 {
   "name": "@danieldiekmeier/async-worker",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A simple worker to do work in intervals",
-  "main": "index.js",
-  "module": "main.js",
+  "main": "worker.js",
+  "type": "module",
   "scripts": {
-    "test": "ava",
-    "test:watch": "ava --watch --verbose"
+    "test": "node --test",
+    "test:watch": "node --test --watch tests"
   },
   "repository": {
     "type": "git",
@@ -14,28 +14,15 @@
   },
   "keywords": [
     "async",
-    "worker"
+    "worker",
+    "interval",
+    "async-await",
+    "async-await-worker"
   ],
   "author": "Daniel Diekmeier",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/danieldiekmeier/async-worker/issues"
   },
-  "homepage": "https://github.com/danieldiekmeier/async-worker#readme",
-  "dependencies": {
-    "esm": "^3.2.25"
-  },
-  "ava": {
-    "files": [
-      "tests/*.test.js"
-    ],
-    "failFast": true,
-    "compileEnhancements": false,
-    "require": [
-      "esm"
-    ]
-  },
-  "devDependencies": {
-    "ava": "^2.0.0"
-  }
+  "homepage": "https://github.com/danieldiekmeier/async-worker#readme"
 }
